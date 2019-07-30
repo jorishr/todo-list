@@ -1,0 +1,64 @@
+//  task list styles --start
+ul {
+    clear: both;    //  clear floats when input element is faded out
+    list-style: none;
+    border: 3px solid $mainYellow;
+}
+
+li {
+    background-color: $mainWhite;
+    height: 40px;
+    line-height: 40px;
+    position: relative;
+}
+
+li:nth-of-type(2n) {
+    background-color: $lightGrey;
+}
+
+.doneStyles {
+    text-decoration: line-through;
+    color: $mainGrey; 
+}
+//  task list styles ---end
+
+//  btn styles ---start
+.btnDone, .btnEdit, .btnDelete {
+    text-align: center;
+    display: inline-block;
+    height: 40px;
+    width: 0px;
+    transition: all .5s linear .2s;
+
+    i {
+        color: $mainWhite;
+        opacity: 0;
+        transition: all .5s linear .2s;
+    }
+} 
+
+.btnDone{
+    background-color: $mainGreen;
+}
+
+.btnEdit {
+    background-color: $mainYellow;
+
+}
+
+.btnDelete {
+    background-color: $mainRed;
+    margin-right: 1.25rem;
+
+}
+
+li:hover {
+    .btnDelete, .btnEdit, .btnDone {
+        width: 40px;
+    }
+
+    i {
+        opacity: 1;
+    }
+}
+//  btn styles ---end

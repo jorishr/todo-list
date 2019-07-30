@@ -1,0 +1,61 @@
+.container {
+    background-color: $mainYellow;
+    box-shadow: 10px 10px 5px black;
+    border-radius: 25px;
+
+    width: 360px;
+    margin: 100px auto;
+    padding: 20px;
+}
+
+.title {
+    float: left;
+    text-transform: uppercase;
+    font-size: 1.5rem;
+    font-weight: normal;
+    color: $mainGrey;
+
+    padding: .6rem 1.25rem;
+}
+
+.btnAdd {
+    float: right;
+    position: relative;
+    height: 40px;
+    width: 40px;
+    background-color: $mainYellow;
+    color: $mainGrey;
+
+    margin-top: 5px;
+    margin-right: 1.25rem;
+
+    i {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+}
+
+input {
+    display: none;
+    width: 100%;
+    background-color: $lightGrey;
+    font-size: 1.15rem;
+    padding: .5rem .5rem .5rem 1.25rem; 
+    outline: none;
+    border: 3px solid $mainYellow;
+    margin-bottom: 10px;
+}
+
+input:focus {
+    background-color: $mainWhite;
+}
+
+#editForm {
+    font-style: italic;
+}
+
+#editForm:focus {
+    font-style: italic;
+}
