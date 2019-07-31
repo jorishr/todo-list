@@ -2,7 +2,8 @@
 
 Exercise based on the to-do-list in The Web Developer Bootcamp, by Colt Steele.
 
-CUSTOMIZATION NOT PART OF THE COURSE EXAMPLE
+Customizations (not part of the original course example):
+
 A.  DEV SETUP
 - project built with NPM
 - GULP taskrunner for SASS and JS compilation with Webpack
