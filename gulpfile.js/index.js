@@ -28,13 +28,18 @@ function jsCompile(cb){
     });
 };
 
+function bsReload(cb){
+    bs.reload();
+    cb(new Error('Error while reloading browsers'));
+};
+
 function watchFiles(){
     bs.init({
         server: './app'
         });
     watch(sassFiles, styles);
-    watch(jsFiles, series(jsCompile, bs.reload));
-    watch(htmlFiles).on('change', bs.reload);
+    watch(jsFiles, series(jsCompile, bsReload));
+    watch(htmlFiles).on('change', bsReload);
 };
 
 exports.styles  = styles;
