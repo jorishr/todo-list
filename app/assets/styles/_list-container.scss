@@ -46,6 +46,7 @@ input {
     outline: none;
     border: 3px solid $mainYellow;
     margin-bottom: 10px;
+    transition: transform .5s ease-out .1s;
 }
 
 input:focus {

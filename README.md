@@ -15,4 +15,8 @@ B.  STYLING
 - custom page styles
 
 C.  ADDED FUNCTIONALITY
-- existing tasks can be edited   
+- existing tasks can be edited
+- three buttons slide in on hover over task: done, edit, delete
+
+D.  REFACTORED CODE IN VANILLA JS
+- see vanilla_js-bundle.js

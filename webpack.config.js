@@ -2,7 +2,8 @@ const path = require('path');
 module.exports = {
     mode: 'development',
     entry: {
-        app: './app/assets/scripts/app.js',
+        jquery: './app/assets/scripts/app-jquery.js',
+        vanilla_js: './app/assets/scripts/app-vanilla_js.js'
     },
     output: {
         path: path.resolve(__dirname, './app/'),

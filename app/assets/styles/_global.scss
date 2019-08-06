@@ -11,3 +11,17 @@ body {
     background-color: $mainGrey;
     background: linear-gradient(to top, #434343, #000000);
 }
+
+.fadeOut {
+    opacity: 0;
+    transition: opacity .5s ease-out .1s;
+}
+
+.fadeIn {
+    display: block;
+    transform: scale(0);
+}
+
+.transform {
+    transform: scale(1);
+}

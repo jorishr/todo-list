@@ -7,10 +7,10 @@ const   autoprefixer    = require('autoprefixer'),
 
 sass.compiler = require('node-sass');
 
-//  files
-const htmlFiles = './app/**/*.html';
-const sassFiles = './app/assets/styles/**/*.scss';
-const jsFiles   = './app/assets/scripts/**/*.js';
+//  globs and paths
+const   htmlFile = './app/**/*.html',
+        sassGlob = './app/assets/styles/**/*.scss',
+        jsGlob   = './app/assets/scripts/**/*.js';
 
 function styles(){
     return src(sassFiles)
@@ -30,7 +30,7 @@ function jsCompile(cb){
 
 function bsReload(cb){
     bs.reload();
-    cb(new Error('Error while reloading browsers'));
+    cb();
 };
 
 function watchFiles(){
@@ -38,9 +38,9 @@ function watchFiles(){
         server: './app',
         tunnel: 'todolist'
         });
-    watch(sassFiles, styles);
-    watch(jsFiles, series(jsCompile, bsReload));
-    watch(htmlFiles).on('change', bsReload);
+    watch(sassGlob, styles);
+    watch(jsGlob, series(jsCompile, bsReload));
+    watch(htmlFile, bsReload);
 };
 
 exports.styles  = styles;
