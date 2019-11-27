@@ -13,7 +13,7 @@ const   htmlFile = './app/**/*.html',
         jsGlob   = './app/assets/scripts/**/*.js';
 
 function styles(){
-    return src(sassFiles)
+    return src(sassGlob)
         .pipe(sass().on('error', sass.logError))
         .pipe(postcss([autoprefixer]))
         .pipe(dest('./app/'))

@@ -4486,7 +4486,8 @@ li:nth-of-type(2n) {
   .btnDone i, .btnEdit i, .btnDelete i {
     color: #EAF0F1;
     opacity: 0;
-    transition: all .5s linear .2s; }
+    transition: all .5s linear .2s;
+    cursor: pointer; }
 
 .btnDone {
   background-color: #45CE30; }
