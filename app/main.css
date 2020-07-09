@@ -4418,11 +4418,13 @@ readers do not read off random characters that represent icons */
 
 .title {
   float: left;
-  text-transform: uppercase;
   font-size: 1.5rem;
-  font-weight: normal;
+  font-weight: bold;
   color: #2C3335;
-  padding: .6rem 1.25rem; }
+  padding: 0; }
+  .title span {
+    font-weight: normal;
+    color: #EAF0F1; }
 
 .btnAdd {
   float: right;
@@ -4431,8 +4433,7 @@ readers do not read off random characters that represent icons */
   width: 40px;
   background-color: #F3B431;
   color: #2C3335;
-  margin-top: 5px;
-  margin-right: 1.25rem; }
+  cursor: pointer; }
   .btnAdd i {
     position: absolute;
     top: 50%;
@@ -4458,6 +4459,28 @@ input:focus {
 
 #editForm:focus {
   font-style: italic; }
+
+.actions {
+  clear: both;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: center;
+  padding: 0 .25em; }
+  .actions button {
+    margin-right: .5em;
+    color: #EAF0F1;
+    background-color: #F3B431;
+    border: none;
+    cursor: pointer;
+    font-size: 1.25rem;
+    display: none; }
+  .actions input#checkAll {
+    background-color: #EAF0F1;
+    display: block;
+    width: 20px;
+    height: 20px;
+    margin-top: 10px; }
 
 ul {
   clear: both;
@@ -4504,3 +4527,11 @@ li:hover .btnDelete, li:hover .btnEdit, li:hover .btnDone {
 
 li:hover i {
   opacity: 1; }
+
+.task__box {
+  display: block;
+  width: 15px;
+  height: 15px;
+  float: right;
+  margin-top: 15px;
+  margin-right: 15px; }

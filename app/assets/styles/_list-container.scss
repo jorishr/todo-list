@@ -10,12 +10,18 @@
 
 .title {
     float: left;
-    text-transform: uppercase;
+    //text-transform: uppercase;
     font-size: 1.5rem;
-    font-weight: normal;
+    font-weight: bold;
     color: $mainGrey;
+    
+    padding: 0;
+    
+    span {
+        font-weight: normal;
+        color: $mainWhite;
 
-    padding: .6rem 1.25rem;
+    }
 }
 
 .btnAdd {
@@ -25,9 +31,10 @@
     width: 40px;
     background-color: $mainYellow;
     color: $mainGrey;
+    cursor: pointer;
 
-    margin-top: 5px;
-    margin-right: 1.25rem;
+    //margin-top: 5px;
+    //margin-right: 1.25rem;
 
     i {
         position: absolute;
@@ -59,4 +66,31 @@ input:focus {
 
 #editForm:focus {
     font-style: italic;
+}
+
+.actions {
+    clear: both;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 0 .25em;
+
+    button {
+        margin-right: .5em;
+        color: $mainWhite;
+        background-color: $mainYellow;
+        border: none;
+        cursor: pointer;
+        font-size: 1.25rem;
+        display: none;
+    }
+
+    input#checkAll {
+        background-color: $mainWhite;
+        display: block;
+        width: 20px;
+        height: 20px;
+        margin-top: 10px;
+    }
 }
