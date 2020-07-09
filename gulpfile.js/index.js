@@ -35,8 +35,7 @@ function bsReload(cb){
 
 function watchFiles(){
     bs.init({
-        server: './app',
-        tunnel: 'todolist'
+        server: './app'
         });
     watch(sassGlob, styles);
     watch(jsGlob, series(jsCompile, bsReload));
