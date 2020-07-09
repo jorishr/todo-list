@@ -1,10 +1,28 @@
 import $ from 'jquery';
-/* 
-    Note: event listeners needs to account for elements that can be added by 
-    the user    
-*/
+//load from db
+$(document).ready(function(){
+    $.getJSON('/api/todos')
+    .then(todos => {
+        //console.log(todos)
+        todos.forEach(todo => addTodo(todo))
+    })
+    .catch(function(err){console.log(err)});
+});
+//build html element from db data
+function addTodo(todo){
+    let newLi = $(`<li><span class="btnDone"><i class="far fa-check-square"></i></span><span class="btnEdit"><i class='fas fa-edit'></i></span><span class="btnDelete"><i class='fas fa-trash-alt'></i></span>${todo.name}<input class="task__box" type="checkbox"></li>`);
+    newLi.data('id', todo._id);
+    newLi.data('completed', todo.completed);
+    if(todo.completed){
+        newLi.addClass('doneStyles');
+    }
+    $('ul').append(newLi);   
+    $('ul > li > input').on('click', handleSelect);
+}
+
 $('ul').on('click', '.btnDone', handleStatusChange);
 
+//mark as done all selected
 $('button#update').on('click', function() {
     const checkedBoxes = $('input:checked:not(#checkAll)');
     checkedBoxes.each(function() {
@@ -19,11 +37,14 @@ $('ul > li > input').on('click', handleSelect);
 //  input new to-do's
 $('#newForm').keypress(function(event){
     if(event.which === 13){
-        //  capture the input value and reset input field
         let textInput = $(this).val().trim();
+        $.post('/api/todos', {name: textInput})
+        .then(function(newTodo){
+            addTodo(newTodo);
+        })
+        .catch(function(err){console.log(err)});
+        //  capture the input value and reset input field
         $(this).val('');
-        $('ul').append(`<li><span class="btnDone"><i class="far fa-check-square"></i></span><span class="btnEdit"><i class='fas fa-edit'></i></span><span class="btnDelete"><i class='fas fa-trash-alt'></i></span>${textInput}<input class="task__box" type="checkbox"></li>`);
-        $('ul > li > input').on('click', handleSelect);
     }
 });
 /*  
@@ -41,28 +62,32 @@ $('ul').on('click', '.btnEdit', function(event) {
     event.stopPropagation();
 });
 
-//  update task text value
-$('#editForm').keypress(handleUpdate);
+//  edit task text value
+$('#editForm').keypress(handleEdit);
 
-function handleUpdate(){
+function handleEdit(){
     if(event.which === 13){
-        //  capture the input value and reset field on enter
-        let newInput = $(this).val().trim();
-        $(this).val('');
-        $('.selected').html(`<span class="btnDone"><i class="far fa-check-square"></i></span><span class="btnEdit"><i class='fas fa-edit'></i></span><span class="btnDelete"><i class='fas fa-trash-alt'></i></span>${newInput}<input class="task__box" type="checkbox">`);
-        $('.selected').removeClass('selected');
-        $(this).fadeOut(500);
+        const current = $('.selected');
+        const id = current.data('id');
+        const newName = event.target.value; 
+        $.ajax({
+            method: 'PUT',
+            url: `/api/todos/${id}`,
+            data: { name: newName }
+        })
+        .then(function(editedTodo){
+            //console.log(editedTodo)
+            $('.selected').html(`<span class="btnDone"><i class="far fa-check-square"></i></span><span class="btnEdit"><i class='fas fa-edit'></i></span><span class="btnDelete"><i class='fas fa-trash-alt'></i></span>${newName}<input class="task__box" type="checkbox">`);
+            $('.selected').removeClass('selected');
+            $('#editForm').val('');
+            $('#editForm').fadeOut(500);
+        })
+        .catch(function(err){console.log(err)});
     };
 }
 
 //  delete button
-$('ul').on('click', '.btnDelete', function(event) {
-    //  parent of the .btnDelete is the <li>. <li> gets faded out, then removed
-    $(this).parent().fadeOut(500, function(){
-        $(this).remove();
-    });
-    event.stopPropagation();
-});
+$('ul').on('click', '.btnDelete', handleDel);
 
 $('button#del').on('click', function() {
     const checkedBoxes = $('input:checked:not(#checkAll)');
@@ -75,9 +100,16 @@ $('button#del').on('click', function() {
 
 function handleDel(event, elem){
     const current = elem ? elem : $(this);
-    current.parent().fadeOut(500, function(){
-        $(this).remove();
-    });
+    $.ajax({
+        method: 'DELETE',
+        url: `/api/todos/${current.parent().data('id')}`
+    })
+    .then(function(){
+        current.parent().fadeOut(500, function(){
+            $(this).remove();
+        })
+    })
+    .catch(function(err){console.log(err)});
     event.stopPropagation();
 }
 
@@ -104,8 +136,24 @@ $("#checkAll").click(function () {
 function handleStatusChange(event, elem){
     //fn can be triggered by update btn on individual task or bulk update
     const current = elem ? elem : $(this);
-    current.parent().toggleClass('doneStyles');
+    let isDone    = current.parent().data('completed');
+    const updateData = { completed: !isDone };
+    $.ajax({
+        method: 'PUT',
+        url: `/api/todos/${current.parent().data('id')}`,
+        data: updateData
+    })
+    .then(function(){
+        //update styles
+        const p = current.parent().children().first();
+        p.toggleClass('done');
+        //update the hidden data attribute
+        current.parent().data('completed', !isDone);
+        current.parent().toggleClass('doneStyles');
+    })
+    .catch(function(err){console.log(err)});
 }
+
 let lastChecked = null;
 function handleSelect(){
     //let lastChecked = null;
@@ -119,7 +167,7 @@ function handleSelect(){
         return;
     }
     if(event.shiftKey) {
-        console.log(lastChecked)
+        //console.log(lastChecked)
         //console.log("Shift held");
         let start = checkboxes.index(this);
         let end   = checkboxes.index(lastChecked);

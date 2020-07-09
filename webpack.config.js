@@ -2,11 +2,11 @@ const path = require('path');
 module.exports = {
     mode: 'development',
     entry: {
-        jquery: './app/assets/scripts/app-jquery.js',
-        vanilla_js: './app/assets/scripts/app-vanilla_js.js'
+        jquery: './app/public/scripts/app-jquery.js',
+        vanilla_js: './app/public/scripts/app-vanilla_js.js'
     },
     output: {
-        path: path.resolve(__dirname, './app/'),
+        path: path.resolve(__dirname, './app/public/scripts/tmp'),
         filename: '[name]-bundle.js'
     },
     module: {

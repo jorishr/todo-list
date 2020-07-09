@@ -1,24 +1,25 @@
-# basic front-end todo-list with html/css and JQUERY
+# Task Manager
+Single page todo-app with custom JSON API and (shift-) select multiple functionality.
 
-# credits
-Exercise based on the to-do-list in The Web Developer Bootcamp, by Colt Steele.
+## UI code with jQuery
+- Main UI feature: using checkboxes and the SHIFT key, the user can make a custom selection of tasks and delete them or set their status to done. 
+- Hovering over an existing task gives the user options to:
+  - update task text, 
+  - mark as complete, 
+  - delete.
 
-Customizations (not part of the original course example):
+## API endpoints
+- '/api/todos' GET: get all tasks from database
+- '/api/todos' POST: add new task to database
+- '/api/todos/:id' GET: retrieve a single task 
+- '/api/todos/:id' PUT: update an existing task
+- '/api/todos/:id' DELETE: delete an existing task
 
-A.  DEV SETUP
-- project built with NPM
+## Development setup
 - GULP taskrunner for SASS 
 - JS compilation with Webpack
-- browserSync
-- fontawesome local install (sass)
+- BrowserSync
+- Fontawesome local install (sass import)
 
-B.  STYLING
-- SASS
-- custom design
-
-C.  ADDED FUNCTIONALITY
-- existing tasks can be edited
-- three buttons slide in on hover over task: done, edit, delete
-
-D.  REFACTORED CODE IN VANILLA JS
-- same functionality rewritten in vanilla js, see vanilla_js-bundle.js
+## VanilaJS
+In the scripts folder you can find a refactored version of the app in vanilla Javascript, albeit with less UI functionality.

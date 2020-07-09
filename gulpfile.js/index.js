@@ -3,20 +3,22 @@ const   autoprefixer    = require('autoprefixer'),
         sass            = require('gulp-sass'),
         postcss         = require('gulp-postcss'),
         bs              = require('browser-sync').create(),
-        webpack         = require('webpack');    
+        webpack         = require('webpack'),
+        nodemon         = require('nodemon');    
 
 sass.compiler = require('node-sass');
 
 //  globs and paths
 const   htmlFile = './app/**/*.html',
-        sassGlob = './app/assets/styles/**/*.scss',
-        jsGlob   = './app/assets/scripts/**/*.js';
+        sassGlob = './app/public/styles/**/*.scss',
+        jsGlob   = './app/public/scripts/*.js',
+        baseDir  = './app';
 
 function styles(){
     return src(sassGlob)
         .pipe(sass().on('error', sass.logError))
         .pipe(postcss([autoprefixer]))
-        .pipe(dest('./app/'))
+        .pipe(dest('./app/public/styles'))
         .pipe(bs.stream());
 };
 
@@ -34,14 +36,43 @@ function bsReload(cb){
 };
 
 function watchFiles(){
-    bs.init({
-        server: './app'
-        });
-    watch(sassGlob, styles);
+    watch(sassGlob, series(styles, bsReload));
     watch(jsGlob, series(jsCompile, bsReload));
     watch(htmlFile, bsReload);
 };
 
+function startNodemon(cb) {
+    let called = false;
+    return nodemon({
+        script: baseDir + '/bin/www.js',
+        watch:  baseDir + '/**/*.js',
+    })
+    .on('start', function onStart() {
+        // ensure start only got called once
+        if (!called) { cb(); }
+        called = true;
+    })
+    .on('restart', function onRestart() {
+        // reload connected browsers after a slight delay
+        console.log('Restarting server...');
+        setTimeout(function reload() {
+            bs.reload({
+                stream: false
+            });
+        }, 2000);
+    });
+};
+
+//  browser-sync
+function startBrowserSync (){
+    bs({
+      // proxy the expressjs app and use a different port 
+      proxy: 'http://localhost:3000',
+      port: 4000,
+      files: [cssSrcGlob, jsSrcGlob, htmlSrcGlob]   //  watch main files for changes
+    });
+};
+
 exports.styles  = styles;
 exports.js      = jsCompile;
-exports.default = watchFiles;
+exports.default = series(startNodemon, watchFiles);
