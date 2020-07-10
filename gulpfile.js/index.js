@@ -4,7 +4,8 @@ const   autoprefixer    = require('autoprefixer'),
         postcss         = require('gulp-postcss'),
         bs              = require('browser-sync').create(),
         webpack         = require('webpack'),
-        nodemon         = require('nodemon');    
+        nodemon         = require('nodemon'),
+        build           = require('./build');    
 
 sass.compiler = require('node-sass');
 
@@ -76,3 +77,4 @@ function startBrowserSync (){
 exports.styles  = styles;
 exports.js      = jsCompile;
 exports.default = series(startNodemon, watchFiles);
+exports.build   = build;
