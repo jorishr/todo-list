@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>To-do App</title>
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,500,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles/main.css">
+
+</head>
+<body>
+    <div class="container">
+        <h1 class="title">task<span>manager</span></h1>
+        <div class="btnAdd" title="Add a task"><i class="fas fa-plus-square fa-2x"></i></div>
+        <input type="text" name="newForm" id="newForm" placeholder="Write a new task..." autofocus maxlength="18">
+        <input type="text" name="editForm" id="editForm" placeholder="Edit your task..." autofocus maxlength="18">
+        <div class="actions">
+            <button id="update"><i class="far fa-check-square" title="Update selection"></i></button>
+            <button id="del"><i class="far fa-trash-alt" title="Delete selection"></i></button>
+            <input id="checkAll" type="checkbox" title="Select all">
+        </div>
+        <ul>
+<!--             <li><span class="btnDone"><i class="far fa-check-square"></i></span><span class="btnEdit"><i class="far fa-edit"></i></span><span class="btnDelete"><i class="far fa-trash-alt"></i></span>Do it somehow<input class="task__box" type="checkbox"></li>
+            <li><span class="btnDone"><i class="far fa-check-square"></i></span><span class="btnEdit"><i class="far fa-edit"></i></span><span class="btnDelete"><i class="far fa-trash-alt"></i></span>Do this now<input class="task__box" type="checkbox"></li>
+            <li><span class="btnDone"><i class="far fa-check-square"></i></span><span class="btnEdit"><i class="far fa-edit"></i></span><span class="btnDelete"><i class="far fa-trash-alt"></i></span>Do that later<input class="task__box" type="checkbox"></li>
+            <li><span class="btnDone"><i class="far fa-check-square"></i></span><span class="btnEdit"><i class="far fa-edit"></i></span><span class="btnDelete"><i class="far fa-trash-alt"></i></span>Do it when you can<input class="task__box" type="checkbox"></li>
+ -->        </ul>
+    </div>
+    <script src="scripts/tmp/jquery-bundle.js"></script>
+    <!-- <script src="scripts/vanilla_js-bundle.js"></script> -->
+</body>
+</html>

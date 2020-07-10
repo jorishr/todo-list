@@ -43,7 +43,7 @@ li:nth-of-type(2n) {
 }
 
 .btnEdit {
-    background-color: $mainYellow;
+    background-color: $secondaryRed;
 
 }
 
@@ -63,3 +63,11 @@ li:hover {
     }
 }
 //  btn styles ---end
+.task__box {
+    display: block;
+    width: 15px;
+    height: 15px;
+    float: right;
+    margin-top: 15px;
+    margin-right: 15px;
+}
